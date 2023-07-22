@@ -28,6 +28,7 @@ var dataRef3 = database.ref('TemperatureStatus')
 dataRef1.on('value', function (getdata1) {
   var cel = getdata1.val()
   document.getElementById('Celsius').innerHTML = cel
+  setTemperatureBackground(cel)
 })
 dataRef2.on('value', function (getdata2) {
   var fah = getdata2.val()
@@ -37,3 +38,17 @@ dataRef3.on('value', function (getdata3) {
   var sta = getdata3.val()
   document.getElementById('TemperatureStatus').innerHTML = sta
 })
+
+function setTemperatureBackground (temperature) {
+  const body = document.body
+
+  if (temperature <= 10) {
+    body.style.backgroundColor = 'blue'
+  } else if (temperature > 10 && temperature <= 17) {
+    body.style.backgroundColor = 'green'
+  } else if (temperature > 18 && temperature <= 30) {
+    body.style.backgroundColor = 'yellow'
+  } else {
+    body.style.backgroundColor = 'red'
+  }
+}
