@@ -43,12 +43,12 @@ function setTemperatureBackground (temperature) {
   const body = document.body
 
   if (temperature <= 10) {
-    body.style.backgroundColor = 'blue'
+    body.style.backgroundColor = 'rgb(163, 221, 203)'
   } else if (temperature > 10 && temperature <= 17) {
-    body.style.backgroundColor = 'green'
+    body.style.backgroundColor = 'rgb(203, 255, 169)'
   } else if (temperature > 18 && temperature <= 30) {
-    body.style.backgroundColor = 'yellow'
+    body.style.backgroundColor = 'rgb(255, 214, 165)'
   } else {
-    body.style.backgroundColor = 'red'
+    body.style.backgroundColor = 'rgb(255, 155, 155)'
   }
 }
