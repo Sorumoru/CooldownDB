@@ -1,5 +1,11 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js'
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js'
+import {
+  getDatabase,
+  ref,
+  onValue
+} from 'https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,25 +24,25 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig)
+initializeApp(firebaseConfig)
 
-var database = firebase.database()
-var dataRef1 = database.ref('Celsius')
-var dataRef2 = database.ref('Fahrenheit')
-var dataRef3 = database.ref('TemperatureStatus')
+// Initialize Database
+const db = getDatabase()
 
-dataRef1.on('value', function (getdata1) {
-  var cel = getdata1.val()
-  document.getElementById('Celsius').innerHTML = cel
-  setTemperatureBackground(cel)
+onValue(ref(db, 'Celsius'), snapshot => {
+  var data = snapshot.val()
+  document.getElementById('Celsius').innerHTML = data
+  setTemperatureBackground(data)
 })
-dataRef2.on('value', function (getdata2) {
-  var fah = getdata2.val()
-  document.getElementById('Fahrenheit').innerHTML = fah
+
+onValue(ref(db, 'Fahrenheit'), snapshot => {
+  var data = snapshot.val()
+  document.getElementById('Fahrenheit').innerHTML = data
 })
-dataRef3.on('value', function (getdata3) {
-  var sta = getdata3.val()
-  document.getElementById('TemperatureStatus').innerHTML = sta
+
+onValue(ref(db, 'TemperatureStatus'), snapshot => {
+  var data = snapshot.val()
+  document.getElementById('TemperatureStatus').innerHTML = data
 })
 
 function setTemperatureBackground (temperature) {
